@@ -38,7 +38,7 @@ class Student(models.Model):
     class_key = models.ForeignKey(ClassList, to_field='class_code', on_delete=models.DO_NOTHING)
     instructor_key = models.ForeignKey(Instructors, on_delete=models.DO_NOTHING)
     # class_hist is a list of class_id instances that the Student has been enrolled in.
-    scheduled = models.BooleanField(default=False)
+    scheduled = models.BooleanField(default=False, null=True, blank=True)
     attempts = models.IntegerField()
     email = models.URLField()
 
