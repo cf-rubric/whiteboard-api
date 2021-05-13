@@ -21,7 +21,7 @@ from .models import (
     )
 
 # Create your views here.
-class Overview(generics.ListAPIView):
+class Overview(generics.RetrieveAPIView):
     queryset = Student.objects.all()
     serializer_class = StudentSerializer
 
@@ -57,6 +57,16 @@ class ScoreTableAPIView(generics.ListAPIView):
     serializer_class = ScoreTableSerializer
 
 
+# class ScheduleStudentAPIView(generics.RetrieveUpdateDestroyAPIView):
+#     queryset = [
+#         Whiteboard.objects.all(), 
+#         WhiteboardImage.objects.all(),
+#         ScoreTable.objects.all(),
+#         CategoryNotes.objects.all(),
+#         ]
 
+
+# class ScheduleAPIView(generics.ListAPIView):
+#     pass  
 
 

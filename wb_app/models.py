@@ -5,7 +5,6 @@ class Instructors(models.Model):
     # TODO: determine if we should use default pk or assign pk based on Canvas info. 
     first_name = models.CharField(max_length=32)
     last_name = models.CharField(max_length=32)
-    # pulled from Slack upon first sign-in
     email = models.URLField()
     # we may need to add a dropdown to the my_class_view allowing the instructor to select
     # which of their classes they wish to view, unless the Canvas info has an indicator of 
@@ -29,15 +28,10 @@ class ClassList(models.Model):
 
 
 class Student(models.Model):
-    # first_name from Canvas_API based on Student_ID
     first_name = models.CharField(max_length=32)
     last_name = models.CharField(max_length=32)
-    # class_key from Canvas_API (student instances should only be
-    # created for students whose class_code are equivalant to "401")
-    # if a class is somehow deleted, class_key will be set to None. implement
     class_key = models.ForeignKey(ClassList, to_field='class_code', on_delete=models.DO_NOTHING)
     instructor_key = models.ForeignKey(Instructors, on_delete=models.DO_NOTHING)
-    # class_hist is a list of class_id instances that the Student has been enrolled in.
     scheduled = models.BooleanField(default=False, null=True, blank=True)
     attempts = models.IntegerField()
     email = models.URLField()
@@ -59,7 +53,6 @@ class Student(models.Model):
 class Whiteboard(models.Model):
     student_key = models.ForeignKey(Student, on_delete=models.DO_NOTHING)
     interviewer_key = models.ForeignKey(Instructors, on_delete=models.DO_NOTHING )
-    # problem_domain_key may actually just be a URL field referencign the github api endpoint. no need for a seperate table.
     problem_domain_url = models.URLField()
     date = models.DateTimeField()
     passed = models.BooleanField(default=False)
@@ -83,7 +76,7 @@ class WhiteboardImage(models.Model):
     def __str__(self):
         # FIXME: does a plain image file have a defualt property of Name?? how would it be referenced from this field???
         # is it format dependent? is there a default if no name is supplied? I should know this!
-        return str(self.student_whiteboard)
+        return self.student_whiteboard
 
 
 
