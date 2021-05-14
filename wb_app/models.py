@@ -5,8 +5,7 @@ from django.contrib.auth.models import User
 
 # Create your models here.
 class Instructors(models.Model):
-   
-    instructor_auth = models.ForeignKey(User, on_delete=models.DO_NOTHING)
+    # instructor_auth = models.ForeignKey(User, on_delete=models.DO_NOTHING)
     first_name = models.CharField(max_length=32)
     last_name = models.CharField(max_length=32)
     email = models.URLField()

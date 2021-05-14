@@ -23,5 +23,5 @@ urlpatterns = [
     
     # TODO: below path necesary for scheduling functionality. (now a stretch-goal)
     # path('schedule-form/', SceduleFormView.as_view(), name='schedule-form'), #POST
-   
+
 ]
