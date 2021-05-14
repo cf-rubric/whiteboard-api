@@ -1,8 +1,11 @@
 from django.db import models
+from django.contrib.auth.models import User
+
+
 
 # Create your models here.
 class Instructors(models.Model):
-    # TODO: determine if we should use default pk or assign pk based on Canvas info. 
+    # instructor_auth = models.ForeignKey(User, on_delete=models.DO_NOTHING)
     first_name = models.CharField(max_length=32)
     last_name = models.CharField(max_length=32)
     email = models.URLField()
@@ -21,10 +24,6 @@ class ClassList(models.Model):
 
     def __str__(self):
         return str(self.class_code)
-    
-
-    # def __repr__(self):
-    #     return self.pk
 
 
 class Student(models.Model):
@@ -39,16 +38,6 @@ class Student(models.Model):
     def __str__(self):
         return self.first_name + self.last_name 
 
-    # method to check if student is scheduled
-    def _is_scheduled__(self):
-        pass
-
-    # method fetches data from db regarding all wb records where student_key and
-    # and class_key match student record student_id and class_key (composite key??)
-    def _get_history(self):
-        pass
-    
-
 
 class Whiteboard(models.Model):
     student_key = models.ForeignKey(Student, on_delete=models.DO_NOTHING)
@@ -62,10 +51,6 @@ class Whiteboard(models.Model):
     def __str__(self):
         return str(self.problem_domain_url + self.date + self.passed)
 
-
-    # checks if whiteboard is pending or complete. returns ---> "pending" + self.date
-    def _status(self):
-        pass
 
 
 class WhiteboardImage(models.Model):
