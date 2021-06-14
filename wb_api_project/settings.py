@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'corsheaders',
     'rest_framework',
     'wb_app',
+    'dj_rest_auth',
 ]
 
 MIDDLEWARE = [
